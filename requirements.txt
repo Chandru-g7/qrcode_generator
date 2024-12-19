@@ -1,0 +1,5 @@
+flask
+PIL
+qrcode
+io
+base64

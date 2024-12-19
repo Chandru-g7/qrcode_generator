@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator</title>
+    <style>
+        /* Modern and Clean Design for QR Code Generator */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #ffffff;
+}
+
+h1 {
+    margin-top: 2rem;
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+form {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 500px;
+    margin: 2rem auto;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 1rem;
+    border: none;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+button {
+    background: #4CAF50;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: transform 0.2s, background 0.2s;
+    width: 100%;
+}
+
+button:hover {
+    background: #45a049;
+    transform: translateY(-2px);
+}
+
+h2 {
+    margin-top: 2rem;
+    font-size: 1.8rem;
+}
+
+img {
+    background: white;
+    padding: 1rem;
+    border-radius: 10px;
+    margin: 1.5rem 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 300px;
+    height: auto;
+}
+
+/* Container for QR code and download button */
+.qr-container {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    border-radius: 15px;
+    margin-top: 2rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Download button specific styles */
+form[action="/download"] button {
+    background: #2196F3;
+    margin-top: 1rem;
+    max-width: 200px;
+}
+
+form[action="/download"] button:hover {
+    background: #1976D2;
+}
+    </style>
+</head>
+<body>
+    <h1>QR Code Generator</h1>
+    <form action="/generate" method="POST">
+        <label for="url">Enter URL:</label>
+        <input type="text" id="url" name="url" placeholder="Enter URL to generate QR code" required>
+        <button type="submit">Generate QR Code</button>
+    </form>
+
+    {% if qr_code %}
+    <div class="qr-container">
+        <h2>Generated QR Code:</h2>
+        <img src="data:image/png;base64,{{ qr_code }}" alt="Generated QR Code">
+        
+        <!-- Download button -->
+        <form action="/download" method="get">
+            <input type="hidden" name="img_data" value="{{ img_data }}">
+            <button type="submit">Download QR Code</button>
+        </form>
+    </div>
+    {% endif %}
+    <center><h2>Developed by GCS</h2></center>
+</body>
+</html>
