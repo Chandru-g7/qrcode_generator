@@ -46,5 +46,3 @@ def download_qr():
     img_binary = base64.b64decode(img_data)
     return send_file(io.BytesIO(img_binary), mimetype='image/png', as_attachment=True, download_name='qr_code.png')
 
-if __name__ == "__main__":
-    app.run(debug=True)
